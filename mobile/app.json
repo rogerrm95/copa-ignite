@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "mobile",
-    "slug": "mobile nlw copa",
+    "name": "mobilecopa",
+    "slug": "mobilecopa",
     "version": "1.0.0",
+    "scheme": "mobilecopa",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
