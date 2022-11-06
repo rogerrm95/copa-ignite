@@ -29,7 +29,7 @@ export default function App() {
         />
 
         {
-          !fontsLoaded ? <Loading /> : <Pools />
+          !fontsLoaded ? <Loading /> : <SignIn />
         }
       </AuthContextProvider>
     </NativeBaseProvider>

@@ -1,14 +1,14 @@
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
+import jwt from '@fastify/jwt'
+import 'dotenv/config'
 
-import { PrismaClient } from 'prisma/prisma-client'
-
-import { z } from 'zod'
-import UUID from 'short-unique-id'
-
-const prisma = new PrismaClient({
-    log: ['query']
-})
+// Rotas //
+import { poolRoutes } from './routes/pool'
+import { userRoutes } from './routes/user'
+import { guessRoutes } from './routes/guess'
+import { gameRoutes } from './routes/game'
+import { authRoutes } from './routes/auth'
 
 async function bootstrap() {
     const fastify = Fastify({
@@ -19,48 +19,19 @@ async function bootstrap() {
         origin: true // Configurar o domínio do front-end em PRODUÇÃO //
     })
 
-    // CONTAGEM DE BOLÕES //
-    fastify.get('/pools/count', async () => {
-        const count = await prisma.pool.count()
+    // VARIAVEL AMBIENTE //
+    const KEY = process.env.JWT_KEY_SECRET ? process.env.JWT_KEY_SECRET : 'nwlcopa'
 
-        return { count }
+    await fastify.register(jwt, {
+        secret: KEY,
     })
 
-    // CONTAGEM DE USUÁRIOS //
-    fastify.get('/users/count', async () => {
-        const count = await prisma.user.count()
-
-        return { count }
-    })
-
-    // CONTAGEM DE PALPITES //
-    fastify.get('/guesses/count', async () => {
-        const count = await prisma.guess.count()
-
-        return { count }
-    })
-
-    // CRIAR BOLÃO //
-    fastify.post('/pools', async (req, res) => {
-        const createPoolBody = z.object({
-            title: z.string(),
-        })
-
-        const generate = new UUID({ length: 6 })
-
-        const { title } = createPoolBody.parse(req.body)
-
-        const code = String(generate()).toLocaleUpperCase()
-
-        await prisma.pool.create({
-            data: {
-                title,
-                code
-            }
-        })
-
-        return res.status(201).send({ code })
-    })
+    // Rotas //
+    fastify.register(authRoutes)
+    fastify.register(poolRoutes)
+    fastify.register(userRoutes)
+    fastify.register(gameRoutes)
+    fastify.register(guessRoutes)
 
     await fastify.listen({
         port: 3333,
