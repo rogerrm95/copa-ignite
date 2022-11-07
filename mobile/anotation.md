@@ -10,6 +10,7 @@
 - Contexto Autenticação
 -- Context API
 - Autenticação (Google)
+- React Navigation (Rotas)
 
 
 # REACT NATIVE 
@@ -119,3 +120,21 @@
 -- Lembrar deestar logado no Expo-CLI;
 -- Comando: npx expo whoami | Traz a conta logada atualmente;
 
+# React Navigation (Rotas)
+- Navegação no RN;
+- Stack, Tab, Modal, Deep Linking, Drawer etc;
+- Instalação: 
+-- npm install @react-navigation/native | Core da biblioteca;
+-- npx expo install react-native-screens react-native-safe-area-context | instalará as versões compativeis;
+- Tipos de Navegação:
+-- npm install @react-navigation/bottom-tabs
+
+- Criar uma pasta "routes" e criar dois arquivos:
+-- "AppRoutes": A pilha de rotas;
+-- "index.tsx": Container de navegação | Logado ou Não?;
+
+- useNavigate() | Hook para navegar entre as rotas;
+
+## Typescript 
+- Criar as tipagens das rotas na pasta @types;
+- Arquivo: navigation.d.ts;

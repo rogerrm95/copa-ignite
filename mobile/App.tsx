@@ -7,10 +7,9 @@ import { THEME } from './src/styles/theme';
 
 // Components //
 import { Loading } from './src/components/Loading';
-import { SignIn } from './src/screens/SignIn';
-import { FindPool } from "./src/screens/FindPool";
-import { Pools } from "./src/screens/Pools";
 
+// Rotas //
+import { Routes } from "./src/routes";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -29,7 +28,7 @@ export default function App() {
         />
 
         {
-          !fontsLoaded ? <Loading /> : <SignIn />
+          !fontsLoaded ? <Loading /> : <Routes />
         }
       </AuthContextProvider>
     </NativeBaseProvider>

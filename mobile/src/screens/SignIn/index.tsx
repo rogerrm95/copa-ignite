@@ -11,7 +11,7 @@ import Fontisto from '@expo/vector-icons/Fontisto';
 import { Button } from '../../components/Button';
 
 export function SignIn() {
-    const { user, signIn } = useAuth()
+    const { isUserLoading, signIn } = useAuth()
 
     return (
         <Center flex={1} bgColor='gray.900' padding={7}>
@@ -22,6 +22,8 @@ export function SignIn() {
                 marginTop={12}
                 leftIcon={<Icon as={Fontisto} name='google' color='white' size='md' />}
                 onPress={signIn}
+                isLoading={isUserLoading}
+                _loading={{ _spinner: { color: 'white' } }}
             >
                 <Button.Text types='SECONDARY' label='Entrar com google' />
             </Button.Root>
@@ -30,7 +32,7 @@ export function SignIn() {
                 marginTop={4}
                 color='gray.200'
                 textAlign='center'>
-                Não utilizamos nenhuma informação além ${'\n'} do seu e-mail para criação de sua conta.
+                Não utilizamos nenhuma informação além {'\n'} do seu e-mail para criação de sua conta.
             </Text>
         </Center>
     );

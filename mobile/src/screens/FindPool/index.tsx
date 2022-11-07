@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { VStack } from "native-base";
 
 // Images & Icons //
@@ -9,6 +10,8 @@ import { Heading } from "../../components/Heading";
 import { Input } from "../../components/Input/Input";
 
 export function FindPool() {
+    const { navigate } = useNavigation()
+
     return (
         <VStack flex={1} bgColor='gray.900'>
             <Header title="Criar novo bolão" showBackButton />
@@ -26,7 +29,7 @@ export function FindPool() {
 
                 <Input marginBottom={2} placeholder="Qual o código do bolão?" />
 
-                <Button.Root>
+                <Button.Root onPress={() => navigate('find')}>
                     <Button.Text label="Buscar bolão" />
                 </Button.Root>
             </VStack>
