@@ -35,7 +35,7 @@ async function bootstrap() {
 
     await fastify.listen({
         port: 3333,
-        //host: '192.168.15.18' // MOBILE - SEGURANÇA //
+        host: '0.0.0.0' // MOBILE - SEGURANÇA - ANDROID //
     })
 }
 
