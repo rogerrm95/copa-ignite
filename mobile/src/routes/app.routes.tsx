@@ -10,6 +10,7 @@ import { New } from '../screens/NewPool'
 import { Pools } from '../screens/Pools'
 import { SignIn } from '../screens/SignIn'
 import { FindPool } from '../screens/FindPool'
+import { Details } from '../screens/Details'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
@@ -52,8 +53,11 @@ export function AppRoutes() {
 
             <Screen name='find'
                 component={FindPool}
-                options={{ tabBarButton: () => null }} /> 
+                options={{ tabBarButton: () => null }} />
 
+            <Screen name='details'
+                component={Details}
+                options={{ tabBarButton: () => null }} />
         </Navigator>
     )
 }

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState, useCallback } from "react";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { VStack, Icon, FlatList, useToast } from "native-base";
 import { api } from "../../services/api";
 
@@ -38,12 +38,16 @@ export function Pools() {
             })
         } finally {
             setIsLoading(false)
+
         }
     }
 
-    useEffect(() => {
-        fetchPools()
-    }, [])
+    // Perfomance - useCallback()//
+    // Irá renderizar a lista de bolões assim que a tela receber o foco //
+    useFocusEffect(
+        useCallback(() => {
+            fetchPools()
+        }, []))
 
     return (
         <VStack flex={1} bgColor="gray.900">
@@ -61,15 +65,25 @@ export function Pools() {
                 </Button.Root>
             </VStack>
 
-            <FlatList
-                data={pools}
-                keyExtractor={item => item.id}
-                renderItem={({ item }) => <PoolCard data={item} />}
-                px={5}
-                showsHorizontalScrollIndicator={false}
-                _contentContainerStyle={{ pb: 10 }}
-                ListEmptyComponent={() => <EmptyPoolList />}
-            />
+            {
+                isLoading ? (
+                    <Loading />
+                ) : (
+                    <FlatList
+                        data={pools}
+                        keyExtractor={item => item.id}
+                        renderItem={({ item }) => (
+                            <PoolCard
+                                data={item}
+                                onPress={() => navigate('details', { id: item.id })} />
+                        )}
+                        ListEmptyComponent={() => <EmptyPoolList />}
+                        showsHorizontalScrollIndicator={false}
+                        _contentContainerStyle={{ pb: 10 }}
+                        px={5}
+                    />
+                )
+            }
         </VStack>
     )
 }

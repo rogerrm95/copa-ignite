@@ -121,3 +121,6 @@
 # DESAFIOS - Versão 2.0
  - Refresh token;
  - Processo de Login na versão WEB;
+
+# BUG #
+ - Ao entrar no Bolão, automaticamente o último que entrar, se torna o dono do bolão;

@@ -137,8 +137,8 @@ export async function poolRoutes(fastify: FastifyInstance) {
                 // Selecionando o nome do dono do bolão //
                 owner: {
                     select: {
+                        id: true,
                         name: true,
-                        id: true
                     }
                 },
                 // Contagem de participantes //
@@ -152,9 +152,9 @@ export async function poolRoutes(fastify: FastifyInstance) {
                 participants: {
                     select: {
                         id: true,
+
                         user: {
                             select: {
-                                name: true,
                                 avatarUrl: true
                             }
                         }
@@ -186,8 +186,8 @@ export async function poolRoutes(fastify: FastifyInstance) {
                 // Selecionando o nome do dono do bolão //
                 owner: {
                     select: {
+                        id: true,
                         name: true,
-                        id: true
                     }
                 },
                 // Contagem de participantes //
@@ -201,9 +201,9 @@ export async function poolRoutes(fastify: FastifyInstance) {
                 participants: {
                     select: {
                         id: true,
+
                         user: {
                             select: {
-                                name: true,
                                 avatarUrl: true
                             }
                         }
