@@ -177,11 +177,7 @@ export async function poolRoutes(fastify: FastifyInstance) {
 
         const { id } = getPoolParams.parse(req.params)
 
-        const pool = await prisma.pool.findUnique({
-            where: {
-                id
-            },
-
+        const pool = await prisma.pool.findFirst({
             include: {
                 // Selecionando o nome do dono do bolão //
                 owner: {
@@ -210,7 +206,15 @@ export async function poolRoutes(fastify: FastifyInstance) {
                     },
                     take: 4
                 }
-            }
+            },
+            where: {
+                id,
+                participants: {
+                    some: {
+                        userId: req.user.sub,
+                    }
+                }
+            },
         })
 
         return res.status(201).send({ pool })

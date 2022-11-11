@@ -1,7 +1,14 @@
+import { ActivityIndicator } from 'react-native';
+import { useState } from 'react';
 import { Button, HStack, Text, useTheme, VStack } from 'native-base';
 import { X, Check } from 'phosphor-react-native';
 import { getName } from 'country-list';
 
+// Datas //
+import dayjs from 'dayjs'
+import ptBr from 'dayjs/locale/pt-br'
+
+// Components //
 import { Team } from '../Team';
 
 interface GuessProps {
@@ -15,6 +22,7 @@ interface GuessProps {
 
 export interface GameProps {
   id: string;
+  date: string;
   firstTeamCountryCode: string;
   secondTeamCountryCode: string;
   guess: null | GuessProps;
@@ -22,13 +30,28 @@ export interface GameProps {
 
 interface Props {
   data: GameProps;
-  onGuessConfirm: () => void;
+  onGuessConfirm: () => Promise<void>;
   setFirstTeamPoints: (value: string) => void;
   setSecondTeamPoints: (value: string) => void;
 };
 
 export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessConfirm }: Props) {
   const { colors, sizes } = useTheme();
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  async function handleGuessConfirm() {
+    try {
+      setIsSubmitting(true)
+      await onGuessConfirm()
+    } catch (_) {
+
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  // Formatação das datas //
+  const when = dayjs(data.date).locale(ptBr).format("DD [de] MMMM [de] YYYY [ás] HH:00")
 
   return (
     <VStack
@@ -46,7 +69,7 @@ export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessCon
       </Text>
 
       <Text color="gray.200" fontSize="xs">
-        22 de Novembro de 2022 às 16:00h
+        {when}
       </Text>
 
       <HStack mt={4} w="full" justifyContent="space-between" alignItems="center">
@@ -67,16 +90,28 @@ export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessCon
 
       {
         !data.guess &&
-        <Button size="xs" w="full" bgColor="green.500" mt={4} onPress={onGuessConfirm}>
+        <Button size="xs" w="full" bgColor="green.500" mt={4} onPress={handleGuessConfirm} disabled={isSubmitting}>
           <HStack alignItems="center">
-            <Text color="white" fontSize="xs" fontFamily="heading" mr={3}>
-              CONFIRMAR PALPITE
-            </Text>
+            {isSubmitting ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <>
+                <Text color="white" fontSize="xs" fontFamily="heading" mr={3}>
+                  CONFIRMAR PALPITE
+                </Text>
 
-            <Check color={colors.white} size={sizes[4]} />
+                <Check color={colors.white} size={sizes[4]} />
+              </>
+            )}
           </HStack>
-        </Button>
+        </Button >
       }
-    </VStack>
+    </VStack >
   );
 }
+
+// TODO //
+// 1. Persistir os dados no Storage (Manter usuário logado) //
+// 2. Traduzir os nomes das Seleções //
+// 3. Exibir os resultados já salvos //
+// 4. Estudar e implementar a funcionalidade de Ranking - Preparar o back-end antes //

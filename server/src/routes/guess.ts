@@ -12,7 +12,7 @@ export async function guessRoutes(fastify: FastifyInstance) {
         return { count }
     })
 
-    // LISTAR OS PALPITES DE UM DETERMINADO JOGO DE UM DETERMINADO BOLÃO //
+    // CADASTRAR UM PALPITE DE UM DETERMINADO JOGO //
     fastify.post('/pools/:poolId/games/:gameId/guesses', {
         onRequest: [authenticate]
     }, async (req, res) => {

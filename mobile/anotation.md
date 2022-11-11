@@ -138,3 +138,16 @@
 ## Typescript 
 - Criar as tipagens das rotas na pasta @types;
 - Arquivo: navigation.d.ts;
+
+# Day.js 
+- Biblioteca para formatação de datas;
+- Instalação: npm i dayjs;
+
+# Variáveis Ambiente
+- Informações sensíveis , não devem estar disponíveis para o front-end;
+- Arquivo .env;
+
+- Instalação: npm i dotenv babel-plugin-inline-dotenv
+- dotenv: Lib para lidar com variáveis ambientes;
+- Configurar o plugin no babel config;
+- Obs: Caso não leia as variaveis ambiente, limpar o cache com a tag --clear;
