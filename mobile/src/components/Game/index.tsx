@@ -2,7 +2,7 @@ import { ActivityIndicator } from 'react-native';
 import { useState } from 'react';
 import { Button, HStack, Text, useTheme, VStack } from 'native-base';
 import { X, Check } from 'phosphor-react-native';
-import { getName } from 'country-list';
+import { getCountryName } from '../../utils/countryList'
 
 // Datas //
 import dayjs from 'dayjs'
@@ -65,7 +65,7 @@ export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessCon
       p={4}
     >
       <Text color="gray.100" fontFamily="heading" fontSize="sm">
-        {getName(data.firstTeamCountryCode)} vs. {getName(data.secondTeamCountryCode)}
+        {getCountryName(data.firstTeamCountryCode)} vs. {getCountryName(data.secondTeamCountryCode)}
       </Text>
 
       <Text color="gray.200" fontSize="xs">
@@ -89,7 +89,7 @@ export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessCon
       </HStack>
 
       {
-        !data.guess &&
+        data.guess &&
         <Button size="xs" w="full" bgColor="green.500" mt={4} onPress={handleGuessConfirm} disabled={isSubmitting}>
           <HStack alignItems="center">
             {isSubmitting ? (
@@ -109,9 +109,3 @@ export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessCon
     </VStack >
   );
 }
-
-// TODO //
-// 1. Persistir os dados no Storage (Manter usuário logado) //
-// 2. Traduzir os nomes das Seleções //
-// 3. Exibir os resultados já salvos //
-// 4. Estudar e implementar a funcionalidade de Ranking - Preparar o back-end antes //
