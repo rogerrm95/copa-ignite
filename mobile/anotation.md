@@ -152,11 +152,5 @@
 - Configurar o plugin no babel config;
 - Obs: Caso não leia as variaveis ambiente, limpar o cache com a tag --clear;
 
-
-
-
-// TODO //
-// 1. Persistir os dados no Storage (Manter usuário logado) - IMPLEMENTADO //
-// 2. Traduzir os nomes das Seleções - IMPLEMENTADO //
-// 3. Exibir os resultados já salvos //
-// 4. Estudar e implementar a funcionalidade de Ranking - Preparar o back-end antes //
+// 1. Montar os jogos da fase de grupo //
+// 2. Estudar e implementar a funcionalidade de Ranking - Preparar o back-end antes //

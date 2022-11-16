@@ -238,8 +238,9 @@ export function getCountryName(code: string) {
     const country = COUNTRY_LIST.find(name => name.code === code)
 
     if (!country) {
-        throw "País não encontrado!"
+        alert(`País não encontrado. Códígo ${code}`)
+        return
     }
 
-    return country.name 
+    return country.name
 }

@@ -77,6 +77,7 @@ export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessCon
           code={data.firstTeamCountryCode}
           position="right"
           onChangeText={setFirstTeamPoints}
+          value={data.guess && data.guess.firstTeamPoints}
         />
 
         <X color={colors.gray[300]} size={sizes[6]} />
@@ -85,11 +86,12 @@ export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessCon
           code={data.secondTeamCountryCode}
           position="left"
           onChangeText={setSecondTeamPoints}
+          value={data.guess && data.guess.secondTeamPoints}
         />
       </HStack>
 
       {
-        data.guess &&
+        !data.guess &&
         <Button size="xs" w="full" bgColor="green.500" mt={4} onPress={handleGuessConfirm} disabled={isSubmitting}>
           <HStack alignItems="center">
             {isSubmitting ? (
