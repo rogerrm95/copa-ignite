@@ -99,7 +99,7 @@ export function Guesses({ poolId, code }: Props) {
           onGuessConfirm={() => handleConfirmGuess(item.id)}
         />
       )}
-      _contentContainerStyle={{ pb: 10 }}
+      _contentContainerStyle={{ pb: 20 }}
     />
   );
 }
